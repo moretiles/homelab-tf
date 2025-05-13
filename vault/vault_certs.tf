@@ -6,7 +6,7 @@ resource "vault_pki_secret_backend_role" "singleton_logging_endpoints" {
    max_ttl          = 3888000
    allow_ip_sans    = true
    key_type         = "rsa"
-   key_bits         = 4096
+   key_bits         = 2048
    allowed_domains  = ["${each.key}.home.arpa"]
    allow_subdomains = true
    allow_bare_domains = true
@@ -21,7 +21,7 @@ resource "vault_pki_secret_backend_role" "singleton_logging_endpoints" {
 #   max_ttl          = 3888000
 #   allow_ip_sans    = true
 #   key_type         = "rsa"
-#   key_bits         = 4096
+#   key_bits         = 2048
 #   allowed_domains  = ["${each.key}.oa.home.arpa"]
 #   allow_subdomains = true
 #   allow_bare_domains = true
@@ -36,7 +36,7 @@ resource "vault_pki_secret_backend_role" "singleton_logging_endpoints" {
 #   max_ttl          = 3888000
 #   allow_ip_sans    = true
 #   key_type         = "rsa"
-#   key_bits         = 4096
+#   key_bits         = 2048
 #   allowed_domains  = ["${each.key}.ob.home.arpa"]
 #   allow_subdomains = true
 #   allow_bare_domains = true
@@ -51,7 +51,7 @@ resource "vault_pki_secret_backend_role" "singleton_logging_endpoints" {
 #   max_ttl          = 3888000
 #   allow_ip_sans    = true
 #   key_type         = "rsa"
-#   key_bits         = 4096
+#   key_bits         = 2048
 #   allowed_domains  = ["${each.key}.hostpi.home.arpa"]
 #   allow_subdomains = true
 #   allow_bare_domains = true
@@ -66,7 +66,7 @@ resource "vault_pki_secret_backend_role" "hosts" {
    max_ttl          = 3888000
    allow_ip_sans    = true
    key_type         = "rsa"
-   key_bits         = 4096
+   key_bits         = 2048
    allowed_domains  = ["${each.key}.home.arpa"]
    allow_subdomains = true
    allow_bare_domains = true
@@ -80,7 +80,7 @@ resource "vault_pki_secret_backend_role" "ldap_server" {
    max_ttl          = 3888000
    allow_ip_sans    = true
    key_type         = "rsa"
-   key_bits         = 4096
+   key_bits         = 2048
    allowed_domains  = ["ldap.home.arpa"]
    allow_subdomains = true
    allow_bare_domains = true
@@ -94,7 +94,7 @@ resource "vault_pki_secret_backend_role" "postgres_general" {
    max_ttl          = 3888000
    allow_ip_sans    = true
    key_type         = "rsa"
-   key_bits         = 4096
+   key_bits         = 2048
    allowed_domains  = ["postgres.home.arpa"]
    allow_subdomains = true
    allow_bare_domains = true
@@ -108,7 +108,7 @@ resource "vault_pki_secret_backend_role" "minio_general" {
    max_ttl          = 3888000
    allow_ip_sans    = true
    key_type         = "rsa"
-   key_bits         = 4096
+   key_bits         = 2048
    allowed_domains  = ["minio.home.arpa", "localhost"]
    allow_subdomains = true
    allow_bare_domains = true
