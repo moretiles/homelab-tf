@@ -27,3 +27,9 @@ variable "test_vm" {
   default = {}
   description = "Set attributes for the test vm"
 }
+
+variable "my_email" {
+  type = string
+  default = ""
+  description = "My email is this"
+}
