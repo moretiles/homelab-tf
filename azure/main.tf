@@ -62,8 +62,6 @@ resource "azurerm_network_security_rule" "allow_wireguard_in" {
 }
 
 # Assign dynamic public ipv4 address
-# It's $0.004 per hour to lease a dynamic IPV4 address, in a year that's about $35
-# Actually I think I'm going to be using a standard tier vm so it's free... will have to see
 
 resource "azurerm_public_ip" "test_vm" {
   name = "test_vm_dip"
