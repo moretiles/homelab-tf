@@ -14,11 +14,11 @@ output "homelab_vm_net_name" {
 }
 
 # ip address output must be from the vm because dynamic ips are only assigned when attached
-output "test_vm_public_ip" {
-  value = azurerm_linux_virtual_machine.test_vm.public_ip_address
+output "azure_bastion_public_ip" {
+  value = azurerm_linux_virtual_machine.azure_bastion.public_ip_address
 }
 
 # ip address output must be from the vm because dynamic ips are only assigned when attached
-output "tst_vm_private_ip" {
-  value = azurerm_linux_virtual_machine.test_vm.private_ip_address
+output "azure_bastion_private_ip" {
+  value = azurerm_linux_virtual_machine.azure_bastion.private_ip_address
 }
