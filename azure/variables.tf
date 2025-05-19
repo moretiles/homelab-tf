@@ -22,7 +22,7 @@ variable "homelab_vm_net_address_space" {
   description = "Kind of arbitrary but it works"
 }
 
-variable "test_vm" {
+variable "azure_bastion" {
   type = map
   default = {}
   description = "Set attributes for the test vm"

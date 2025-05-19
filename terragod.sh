@@ -17,7 +17,9 @@ done
 ls -l | wc -l
 
 #terraform init -upgrade
-terraform apply
+#terraform apply
+#tofu init -upgrade
+tofu apply
 
 find . -maxdepth 1 -iname '*__in__*.tf' -type l -exec rm "{}" \;
 find . -maxdepth 1 -iname '*__in__*.auto.tfvars' -type l -exec rm "{}" \;
