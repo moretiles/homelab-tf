@@ -129,6 +129,7 @@ resource "vault_ldap_auth_backend_user" "oa" {
   policies = [
     "host", 
     "minio_central",
+    "zipsum",
     ]
 }
 
@@ -155,3 +156,38 @@ resource "vault_identity_entity_alias" "hosts" {
 #  }
 #  sensitive = true
 #}
+
+######################
+# kubernetes backend #
+######################
+
+resource "vault_auth_backend" "kubernetes_oba" {
+	type = "kubernetes"
+}
+
+resource "vault_kubernetes_auth_backend_config" "kubernetes_oba" {
+	backend = vault_auth_backend.kubernetes_oba.path
+	kubernetes_host = "https://oba.home.arpa:6443"
+	token_reviewer_jwt = var.kubernetes_vault_injector_service_token
+	kubernetes_ca_cert = "-----BEGIN CERTIFICATE-----\nMIIBdzCCAR2gAwIBAgIBADAKBggqhkjOPQQDAjAjMSEwHwYDVQQDDBhrM3Mtc2Vy\ndmVyLWNhQDE3NDc1Nzc4MjgwHhcNMjUwNTE4MTQxNzA4WhcNMzUwNTE2MTQxNzA4\nWjAjMSEwHwYDVQQDDBhrM3Mtc2VydmVyLWNhQDE3NDc1Nzc4MjgwWTATBgcqhkjO\nPQIBBggqhkjOPQMBBwNCAATIVMr90Anm2u0Axgs849AG2ZVknUgDNIRekyHneKW6\n36FDmoa7O7KLRrj8c3GBSBcUV5S/L5fy4UBeNEGcs9N8o0IwQDAOBgNVHQ8BAf8E\nBAMCAqQwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUDhAflsllTYzi/cByd42U\n4vEJvXwwCgYIKoZIzj0EAwIDSAAwRQIhAMX6nkmIFqCTx1AEHcgQPPsowUev6Yct\nRl0co4P82NDcAiAFMCuuaOccy2BVFiytMzwy9nLzuJnO2Rra6a+V+t/fEQ==\n-----END CERTIFICATE-----"
+	disable_iss_validation = "true"
+	issuer = "https://kubernetes.default.svc.cluster.local"
+}
+
+resource "vault_kubernetes_auth_backend_role" "minio-oba" {
+	backend = vault_auth_backend.kubernetes_oba.path
+	role_name = "minio-service-account"
+	bound_service_account_names = ["minio-service-account"]
+	bound_service_account_namespaces = ["default"]
+	token_ttl = 3456000
+	token_policies = ["minio_central"]
+}
+
+resource "vault_kubernetes_auth_backend_role" "mysql_in_kubernetes" {
+	backend = vault_auth_backend.kubernetes_oba.path
+	role_name = "mysql"
+	bound_service_account_names = ["mysql"]
+	bound_service_account_namespaces = ["default"]
+	token_ttl = 3456000
+	token_policies = ["mysql_in_kubernetes"]
+}
