@@ -136,3 +136,21 @@ resource "vault_policy" "minio_central" {
 
   EOT
 }
+
+resource "vault_policy" "mysql_in_kubernetes" {
+  name = "mysql"
+  policy = <<EOT
+  path "kv/k8s/mysql/*" {
+    capabilities = ["read"]
+  } 
+  EOT
+}
+
+resource "vault_policy" "zipsum_host" {
+    name = "zipsum_host"
+    policy = <<EOT
+    path "kv/zipsum/minio/users/test" {
+        capabilities = ["read"]
+    }
+    EOT
+}
